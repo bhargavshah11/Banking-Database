@@ -10,18 +10,37 @@ connection = pymysql.connect(host='127.0.0.1',
 							 password='password',
 							 db = 'banking',
 							 charset='utf8mb4')
-							 # cursorclass=pymysql.cursors.DictCursor)
 
 
-json_data = {"account_id" : 1454581, "event_date": "2018-01-09", "account_standing": "B", "account_information": {"first_name": "Jane", "last_name": "Smith", "date_of_birth": "1975-09-09", "address": {"street_number": "345", "street_name": "Oak Drive", "unit_number": "12A", "city": "Mount Pleasant", "state": "CA", "zip_code": "90010"}, "email_address": "hello@yahoo.com"} }
+# -------- Assuming this is the JSON record received from Bank's API Endpoint ---------
+
+json_data = {
+			"account_id" : 1454581, 
+			"event_date": "2018-01-09", 
+			"account_standing": "B", 
+			"account_information": {
+			"first_name": "Jane", 
+			"last_name": "Smith", 
+			"date_of_birth": "1975-09-09", 
+			"address": {
+			"street_number": "345", 
+			"street_name": "Oak Drive", 
+			"unit_number": "12A", 
+			"city": "Mount Pleasant", 
+			"state": "CA", 
+			"zip_code": "90010"}, 
+			"email_address": "hello@yahoo.com"} 
+			}
 
 
-# -------- Execute desired functions on the database ---------
+# -------- Updating database if changes found in JSON record---------
 
 def update_email():
 
+	# Account ID from json record
 	account_check = json_data["account_id"]
 
+	# Email ID from json record
 	email_check = json_data["account_information"]["email_address"]
 
 	try:
@@ -33,6 +52,7 @@ def update_email():
 
 			for i in row:			
 				
+				# Validating account ID with existing database
 				if row[0] == account_check:
 
 					# Update email address in database
@@ -40,10 +60,12 @@ def update_email():
 
 					cursor.execute(sql, (email_check, account_check))
 
+					# Necessary to commit since it's not auto update. 
 					connection.commit()
 
 				else:
 
+					# For similar email update request from the user
 					return "It's already up-to-date"
 
 		with connection.cursor() as cursor:
