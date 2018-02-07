@@ -58,7 +58,7 @@ def update_email():
 				# Email address validation
 				if re.match("(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)", email_id_update) != None:
 				
-					# Update email address in database
+					# Update email address in database.
 					sql = "UPDATE clients SET email_address = %s WHERE account_id = %s"
 					cursor.execute(sql, (email_id_update, account_id_check))
 
