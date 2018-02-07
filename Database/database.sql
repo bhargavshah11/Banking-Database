@@ -11,19 +11,19 @@ CREATE DATABASE banking;
 # -------------------------- Creating the table ------------------------------
 # ------ Change the values of varchar, int, date as and when needed ----------
 
-CREATE TABLE clients VALUES(account_id int, 
-							event_date data, 
-							account_standing varchar(10), 
-							first_name varchar(10), 
-							last_name varchar(10),
-							date_of_birth date,
-							street_number int,
-							street_name varchar(10),
-							unit_number varchar(10),
-							city varchar(20),
-							state varchar(10),
-							zip_code int,
-							email_address varchar(30));
+CREATE TABLE clients VALUES(account_id int NOT NULL, 
+			    event_date data, 
+			    account_standing varchar(10), 
+			    first_name varchar(10), 
+			    last_name varchar(10),
+			    date_of_birth date,
+			    street_number int,
+			    street_name varchar(10),
+			    unit_number varchar(10),
+			    city varchar(20),
+			    state varchar(10),
+			    zip_code int,
+			    email_address varchar(30));
 
 
 # Step - 3
@@ -46,7 +46,7 @@ DESCRIBE clients;
 +------------------+-------------+------+-----+---------+-------+
 | Field            | Type        | Null | Key | Default | Extra |
 +------------------+-------------+------+-----+---------+-------+
-| account_id       | int(11)     | YES  |     | NULL    |       |
+| account_id       | int(11)     | YES  |     | NOT NULL|       |
 | event_date       | date        | YES  |     | NULL    |       |
 | account_standing | varchar(10) | YES  |     | NULL    |       |
 | first_name       | varchar(10) | YES  |     | NULL    |       |
