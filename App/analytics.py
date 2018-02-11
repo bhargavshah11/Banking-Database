@@ -22,13 +22,13 @@ json_data = {
 				"last_name": "Smith", 
 				"date_of_birth": "1975-09-09", 
 				"address": {
-				"street_number": "345", 
-				"street_name": "Oak Drive", 
+				"street_number": "3234", 
+				"street_name": "Oak Dr", 
 				"unit_number": "12A", 
 				"city": "Mount Pleasant", 
 				"state": "CA", 
 				"zip_code": "90010"}, 
-				"email_address": "ads@yahoo.com"} 
+				"email_address": "Jane_smith@yahoo.com"} 
 			}
 
 # -------------------------------- Validating Account ID ----------------------------
@@ -82,9 +82,11 @@ def update_email(json_data, cnx):
 		# Necessary to commit since it's not auto update. 
 		connection.commit()
 
-		cnx.execute("SELECT * FROM clients WHERE account_id = %s", account_id_check)
+		cnx.execute("SELECT email_address FROM clients WHERE account_id = %s", account_id_check)
 
-		row = cnx
+		row = cnx.fetchone()
+
+		print("update to this email", row)
 
 	except:
 		return False
@@ -104,7 +106,6 @@ def update_address(json_data, cnx):
 	zip_update = json_data["account_information"]["address"]["zip_code"]
 
 	try:   
-		rows = validate_account(json_data)
 
 		sql = """
 			UPDATE clients 
@@ -114,6 +115,15 @@ def update_address(json_data, cnx):
 		cnx.execute(sql, (street_num_update, street_name_update, unit_num_update, city_update, state_update, zip_update, account_id_check))  
 
 		connection.commit()
+		
+# -------- This will serve as the View after the final changes  ----------------
+# -------- Uncomment after a few more trials --------------------------------
+		
+		# cnx.execute("SELECT address FROM clients WHERE account_id = %s", account_id_check)
+
+		# row = cnx.fetchone()
+
+		# print("update to this address", row)
 
 	except:
 		return False
