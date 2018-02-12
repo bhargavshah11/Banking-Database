@@ -11,6 +11,28 @@ connection = pymysql.connect(host='127.0.0.1',
 							 db = 'banking',           #Enter your db name here
 							 charset='utf8mb4')
 
+<<<<<<< HEAD
+=======
+# -------- Assuming this is the JSON record received from Bank's API Endpoint ---------
+
+json_data = {
+				"account_id" : 1454582, 
+				"event_date": "2018-01-09", 
+				"account_standing": "B", 
+				"account_information": {
+				"first_name": "Jane", 
+				"last_name": "Smith", 
+				"date_of_birth": "1975-09-09", 
+				"address": {
+				"street_number": "3234", 
+				"street_name": "Oak Dr", 
+				"unit_number": "12A", 
+				"city": "Mount Pleasant", 
+				"state": "CA", 
+				"zip_code": "90010"}, 
+				"email_address": "Jane_smith@yahoo.com"} 
+			}
+>>>>>>> 605b5eda94665ed53d3196f7ea695611ff9ebafd
 
 # -------------------------------- Validating Account ID ----------------------------
 def validate_account(json_data, cnx):
@@ -64,6 +86,7 @@ def update_email(json_data, cnx):
 		# Necessary to commit since it's not auto update. 
 		connection.commit()
 
+<<<<<<< HEAD
 		# View after the user has successfully updated the Email ID
 		sql = "SELECT concat(first_name,' ', last_name) FROM update_info"
 
@@ -80,6 +103,13 @@ def update_email(json_data, cnx):
 		clients_email = cnx.fetchone()
 
 		print("Your email address has been updated to: " + clients_email[0])
+=======
+		cnx.execute("SELECT email_address FROM clients WHERE account_id = %s", account_id_check)
+
+		row = cnx.fetchone()
+
+		print("update to this email", row)
+>>>>>>> 605b5eda94665ed53d3196f7ea695611ff9ebafd
 
 	except:
 		return False
@@ -108,6 +138,15 @@ def update_address(json_data, cnx):
 		cnx.execute(sql, (street_num_update, street_name_update, unit_num_update, city_update, state_update, zip_update, account_id_check))  
 
 		connection.commit()
+		
+# -------- This will serve as the View after the final changes  ----------------
+# -------- Uncomment after a few more trials --------------------------------
+		
+		# cnx.execute("SELECT address FROM clients WHERE account_id = %s", account_id_check)
+
+		# row = cnx.fetchone()
+
+		# print("update to this address", row)
 
 		# View after the user has successfully updated the Address
 
@@ -157,4 +196,8 @@ def update():
 		connection.close()
 
 if __name__ == '__main__':
+<<<<<<< HEAD
 	update()
+=======
+	update(json_data)
+>>>>>>> 605b5eda94665ed53d3196f7ea695611ff9ebafd
