@@ -133,10 +133,10 @@ def update_address(json_data, cnx):
 # 	Many features can be added. This is the most basic form of programming. 
 #####
 
-def update():
+def update(filename):
 	
 	# Opening JSON file (Assuming we're receiving that from BANK's API End-point)
-	with open("record.json") as json_file:
+	with open(filename) as json_file:
 		json_data = json.load(json_file)
 
 	# Account ID from json record
@@ -163,4 +163,4 @@ def update():
 		connection.close()
 
 if __name__ == '__main__':
-	update()
+	update("record.json")
