@@ -79,7 +79,7 @@ def update_email(json_data, cnx):
 
 		clients_email = cnx.fetchone()
 
-		print("Your email address has been updated to: " + clients_email[0])
+		print("\n" + "Your email ID has been updated to: " + clients_email[0])
 
 	except:
 		return False
@@ -118,7 +118,7 @@ def update_address(json_data, cnx):
 
 		clients_address = cnx.fetchone()
 
-		print("Address is:", clients_address[0])
+		print("\n" + "Address:", clients_address[0])
 
 	except:
 		# Raise type error if string is entered instead of int for INT fields in the address 
@@ -151,8 +151,28 @@ def update(filename):
 			if rows != None:
 
 				if validate_email(json_data):
+					#Print the updated client Email ID
 					update_email(json_data, cnx)
+					#Print the updated client Address /OR show the same address if no updates. 
 					update_address(json_data, cnx)
+
+					sql = "SELECT * FROM clients WHERE account_id = %s"
+
+					cnx.execute(sql, account_id_check)
+
+					row = cnx.fetchone()
+					
+					"""
+					1.) We could either directly print the record that was updated OR We can print everything present in the DB (It's upto the requirement)
+					2.) We are only printing the updated client record (Using account ID) for clear view.
+					3.) Can easily be changed using the loop below. We can print however way we want and whatever we want to see.   
+					"""
+					
+					while row is not None:
+					    
+					    print ("\n" + "Here is the updated account information:" + "\n",row)
+					    
+					    row = cnx.fetchone()
 					
 			else:
 				# Raise error if the account number entered by the user is not in DB 
