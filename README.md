@@ -97,3 +97,14 @@ Python Command to RUN UNIT TEST:
   - **Option 2:** A filter that can sort information in *alphabatical order (Name), Most recently updated,* etc.
   - **Option 3:** Filter out using SQL queries to only search using *Account ID*. Since it's unique, only one result will pop-up instead of those thousands or millions of records. (Implemented in this project) 
   - **Option 4:** Only show records that were updated in the last one month/year. 
+  
+  
+## Assumptions
+
+1. Two users can have the same address.
+2. Account ID is unqiue.
+3. Every user has an email address
+4. User has nothing to do with "Account_standing"
+5. Birth-date, First Name, and Last Name stays the same. 
+6. Address update request can be sent.
+7. View can be changed as per needs. 
