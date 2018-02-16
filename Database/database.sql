@@ -4,14 +4,14 @@
 # Step - 1
 # -------------------------- Creating the database ---------------------------
 
-CREATE DATABASE banking;
+> CREATE DATABASE banking;
 
 
 # Step - 2
 # -------------------------- Creating the table ------------------------------
 # ------ Change the values of varchar, int, date as and when needed ----------
 
-CREATE TABLE clients VALUES(account_id int NOT NULL, 
+> CREATE TABLE clients VALUES(account_id int NOT NULL, 
 			    event_date data, 
 			    account_standing varchar(10), 
 			    first_name varchar(10), 
@@ -30,9 +30,9 @@ CREATE TABLE clients VALUES(account_id int NOT NULL,
 # ------------------------ Insert values in Database --------------------------	
 # -------- You can always add more values using this same query ---------------	
 
-INSERT INTO clients VALUES (1454581,'2018-01-09','B','Jane','Smith','1975-09-09',345,'Oak Drive','12A','Mount Pleasant','CA',90010,'hello@yahoo.com')
-INSERT INTO clients VALUES (1454582,'2018-01-09','B','Mike','Jones','1975-09-09',345,'Oak Drive','12A','Mount Pleasant','CA',90010,'mike_jones@yahoo.com')
-INSERT INTO clients VALUES (1454583,'2018-01-09','B','Nicola','Tesla','1975-09-09',345,'Oak Drive','12A','Mount Pleasant','CA',90010,'nicola_tesla@yahoo.com')
+> INSERT INTO clients VALUES (1454581,'2018-01-09','B','Jane','Smith','1975-09-09',345,'Oak Drive','12A','Mount Pleasant','CA',90010,'hello@yahoo.com')
+> INSERT INTO clients VALUES (1454582,'2018-01-09','B','Mike','Jones','1975-09-09',345,'Oak Drive','12A','Mount Pleasant','CA',90010,'mike_jones@yahoo.com')
+> INSERT INTO clients VALUES (1454583,'2018-01-09','B','Nicola','Tesla','1975-09-09',345,'Oak Drive','12A','Mount Pleasant','CA',90010,'nicola_tesla@yahoo.com')
 
 
 
@@ -40,7 +40,7 @@ INSERT INTO clients VALUES (1454583,'2018-01-09','B','Nicola','Tesla','1975-09-0
 # After Step - 2
 # ---------------- Database Description ---------------------------------------
 
-DESCRIBE clients; 
+> DESCRIBE clients; 
 
 
 +------------------+-------------+------+-----+---------+-------+
@@ -66,7 +66,7 @@ DESCRIBE clients;
 # After step - 3
 # --------------- Database after inserting values in it ------------------------
 
-SELECT * FROM clients; 
+> SELECT * FROM clients; 
 
 +------------+------------+------------------+------------+-----------+---------------+---------------+-------------+-------------+----------------+-------+----------+------------------------+
 | account_id | event_date | account_standing | first_name | last_name | date_of_birth | street_number | street_name | unit_number | city           | state | zip_code | email_address          |
@@ -76,6 +76,34 @@ SELECT * FROM clients;
 |    1454583 | 2018-01-09 | B                | Nicola     | Tesla     | 1975-09-09    |           345 | Oak Drive   | 12A         | Mount Pleasant | CA    |    90010 | nicola_tesla@yahoo.com |
 +------------+------------+------------------+------------+-----------+---------------+---------------+-------------+-------------+----------------+-------+----------+------------------------+
 
+
+# ----------------------------------- Creating customized VIEW ---------------------------------------
+# --------------- %s helps filter out specific records using unique Account ID number ------------------------
+
+> CREATE VIEW update_info AS
+  SELECT first_name, last_name, street_number, street_name, unit_number, city, state, zip_code, email_address
+  FROM clients
+  WHERE account_id = %s; 
+
+------------------------------------------------------------------------------------------------------------------------
+
+> SHOW FULL TABLES IN banking WHERE TABLE_TYPE LIKE 'VIEW';
+
++-------------------+------------+
+| Tables_in_banking | Table_type |
++-------------------+------------+
+| update_info       | VIEW       |
++-------------------+------------+
+
+------------------------------------------------------------------------------------------------------------------------
+
+> SELECT * FROM update_info;
+
++------------+-----------+---------------+-------------+-------------+----------------+-------+----------+----------------------+
+| first_name | last_name | street_number | street_name | unit_number | city           | state | zip_code | email_address        |
++------------+-----------+---------------+-------------+-------------+----------------+-------+----------+----------------------+
+| Jane       | Smith     |           234 | Oak Drive   | 12A         | Mount Pleasant | CA    |    90010 | jane_smith@yahoo.com |
++------------+-----------+---------------+-------------+-------------+----------------+-------+----------+----------------------+
 
 
 
