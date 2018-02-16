@@ -1,5 +1,6 @@
 import unittest
-from analytics_duplicate import update
+from analytics import update
+import json
 
 """
 Raise a Type error if the ADDRESS provided by the user:
@@ -8,5 +9,10 @@ Raise a Type error if the ADDRESS provided by the user:
 """
 
 class testInfoUpdate(unittest.TestCase):
-	def test_invalid_address(self):
-		self.assertRaises(TypeError, update)
+	def test_invalid_address(self):	
+		
+		with open("record.json") as json_file:
+			json_data = json.load(json_file)		
+			
+			self.assertRaises(ValueError, update, "record.json")
+			

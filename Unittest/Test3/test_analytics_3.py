@@ -1,8 +1,9 @@
 import unittest
-from analytics_duplicate import update
+from analytics import update
+import json
 
 """
-Raise a value error if the Account ID provided by the user:
+Raise a value error if the Account ID provided by the user is:
 	1. is not found in the Database
 	2. More features can be added --> Checking for strings/alphabets in account ID. 
 """
@@ -10,4 +11,8 @@ Raise a value error if the Account ID provided by the user:
 
 class testInfoUpdate(unittest.TestCase):
 	def test_invalid_account(self):
-		self.assertRaises(ValueError, update)
+		
+		with open("record.json") as json_file:
+			json_data = json.load(json_file)		
+			
+			self.assertRaises(ValueError, update, "record.json")

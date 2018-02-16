@@ -29,6 +29,7 @@ def validate_account(json_data, cnx):
 		return rows
 
 	except:
+		raise ValueError("Account number entered is invalid")
 		return False
 
 # -------------------------------- Validating Email ID ------------------------------
