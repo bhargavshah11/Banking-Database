@@ -1,7 +1,7 @@
 # Banking-Database
 Updating Client information using Relational Database Management System. 
 
-# Scenario
+## Scenario
 A client (e.g. a bank) sends data whenever their customers modify their account information. For example, they may tell us when a customer changes their email address on file. The client sends this data as JSON records to a REST API endpoint, example of which are below.
 
 **Assume the account ID field is unique.**
@@ -27,7 +27,7 @@ A client (e.g. a bank) sends data whenever their customers modify their account 
 Write code to process these records to create a view with the most up-to-date information on each account. That is, we would like to query the most recent PII based on the account ID.
 
 
-# Setup
+## Setup
 
 **1.MySQL** [Installation Documentation](https://dev.mysql.com/doc/refman/5.6/en/osx-installation-pkg.html)
  - Install MySQL on your system (Mac/Windows etc) 
@@ -42,7 +42,7 @@ Write code to process these records to create a view with the most up-to-date in
 
 **3.Python 3** [Download Here](https://www.python.org/downloads/)
 
-# Importing Modules
+## Importing Modules
 
 $ pip install PyMySQL  
 $ pip install unittest
@@ -53,6 +53,29 @@ import pymysql.cursors
 import json
 import re
 ```
+
+## Running UnitTests
+
+There are 3 individual unittests in the **UnitTest** folder. All files are customized according to input **JSON RECORD**. Each test checks for different issues as follows:
+
+Python Command to RUN UNIT TEST:
+
+```python -m unittest -v test_module.py```
+
+**Test 1**
+- Checks for Invalid Email Id entered in the json record
+
+**Test 2**
+- Checks for errors in the address entered in the json record
+
+**Test 3**
+- Checks for Account ID entered in the json record 
+
+**More tests considered:**
+1. Cross validating Birth-date with Account ID
+2. Cross validating First-Last Name with the Account ID
+3. Cross validating Birth- date and First-Last Name with the Account ID
+4. Check for Integers instead of string and vice-versa.
 
 ## FAQs
 
