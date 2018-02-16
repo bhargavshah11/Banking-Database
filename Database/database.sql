@@ -1,5 +1,6 @@
 
-# All the SQL queries to get you going with the database management
+# All SQL queries to get you going with the database management
+# Make sure to start with step 1 to setup the DB (You'll need to change the password in App/analytics.py and all the test files as well.  )
 
 # Step - 1
 # -------------------------- Creating the database ---------------------------
