@@ -24,7 +24,7 @@ A client (e.g. a bank) sends data whenever their customers modify their account 
 'event_date': '2017-08-24'}
 ```
 
-Write code to process these records to create a view with the most up-to-date information on each account. That is, we would like to query the most recent PII based on the account ID.
+Process these records to create a view with the most up-to-date information on each account. That is, query the most recent PII based on the account ID.
 
 
 ## Setup
